@@ -1,4 +1,6 @@
 package com.coober.service;
+import java.util.List;
+
 import com.coober.modal.Customer;
 
 public interface CustomerService {

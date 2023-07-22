@@ -6,7 +6,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.coober.Exception.CooberException;
 import com.coober.modal.Cab;
+import com.coober.repository.CabRepository;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -28,7 +30,7 @@ public class CabServiceImpl implements CabService{
         log.info("Class: CabServiceImpl, method: insertCab started");
         // checking for cab already exists or not;
         Optional<Cab> opt=  cabRepository.findById(cab.getCabId());
-        if(opt.isPresent()) throw new RideEasyException("Cab with id: "+cab.getCabId()+" already exists ");
+        if(opt.isPresent()) throw new CooberException("Cab with id: "+cab.getCabId()+" already exists ");
         // if cab does not exist already, then saving the cab;
         Cab persistedCab= cabRepository.save(cab);
         log.info("Class: CabServiceImpl, method: insertCab returned "+persistedCab);
@@ -45,7 +47,7 @@ public class CabServiceImpl implements CabService{
     public Cab updateCab(Cab cab) {
         log.info("Class: CabServiceImpl, method: updateCab started");
         // checking for cab exists or not;
-         Cab existingCab= cabRepository.findById(cab.getCabId()).orElseThrow(()-> new RideEasyException("Cab with id: "+cab.getCabId()+" does not exist "));
+         Cab existingCab= cabRepository.findById(cab.getCabId()).orElseThrow(()-> new CooberException("Cab with id: "+cab.getCabId()+" does not exist "));
          //updating the cab; Note save method act as both, save and update.;
          Cab updatedCab=cabRepository.save(cab);
         log.info("Class: CabServiceImpl, method: updateCab returned "+updatedCab);
@@ -61,7 +63,7 @@ public class CabServiceImpl implements CabService{
     public Cab deleteCab(Integer cabId) {
         log.info("Class: CabServiceImpl, method: deleteCab started");
         // checking for cab exists or not;
-        Cab deletingCab= cabRepository.findById(cabId).orElseThrow(()-> new RideEasyException("Cab with id: "+cabId+" does not exist "));
+        Cab deletingCab= cabRepository.findById(cabId).orElseThrow(()-> new CooberException("Cab with id: "+cabId+" does not exist "));
         cabRepository.deleteById(cabId);
         log.info("Class: CabServiceImpl, method: deleteCab returned "+deletingCab);
         return deletingCab;
@@ -76,7 +78,7 @@ public class CabServiceImpl implements CabService{
     public List<Cab> viewCabsOfType(String carType) {
         log.info("Class: CabServiceImpl, method: viewCabsOfType started");
         List<Cab> cabs= cabRepository.findByCarType(carType);
-        if(cabs.isEmpty()) throw new RideEasyException("No cab found of type "+carType);
+        if(cabs.isEmpty()) throw new CooberException("No cab found of type "+carType);
         log.info("Class: CabServiceImpl, method: viewCabsOfType returned list of cabs of type "+carType);
         return cabs;
     }

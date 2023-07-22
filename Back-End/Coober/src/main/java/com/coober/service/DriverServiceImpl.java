@@ -4,7 +4,10 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
+import org.springframework.stereotype.Service;
+
+import com.coober.Exception.CooberException;
+import com.coober.Exception.NotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.coober.Exception.CooberException;
@@ -76,18 +79,18 @@ public class DriverServiceImpl implements DriverService{
         return updatedDriver;
     }
 
-    /**
-     * @param driverId
-     * @return Driver
-     * Take driver id of Integet type, return deletedDriver;
-     */
+  
     @Override
     public Driver deleteDriver(Integer driverId) {
         log.info("Class: DriverServiceImpl, method: deleteDriver started ");
 
         Optional<Driver> opt= driverRepository.findById(driverId);
+        if(opt.isEmpty()) throw new NotFoundException("Driver with id: "+driverId+ "does not exist.");
+            
+
         if(opt.isEmpty())
             throw new NotFoundException("Driver with id: "+driverId+ "does not exist.");
+
 
         driverRepository.deleteById(driverId);
         log.info("Class: DriverServiceImpl, method: deleteDriver returned deleted driver");

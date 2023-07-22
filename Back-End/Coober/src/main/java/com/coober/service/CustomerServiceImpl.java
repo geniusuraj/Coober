@@ -1,10 +1,14 @@
 package com.coober.service;
-
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.coober.Exception.CooberException;
+import com.coober.Exception.InvalidInputException;
+import com.coober.Exception.NotFoundException;
+import com.coober.modal.Customer;
 import com.coober.repository.CustomerRepository;
 
 import lombok.extern.slf4j.Slf4j;
@@ -83,7 +87,8 @@ public class CustomerServiceImpl implements CustomerService{
                     log.info("Customer Validated successful : CustomerService");
                     return customer;
                 }else{
-                    throw new RideEasyException("This user is Deleted");
+
+                    throw new CooberException("This user is Deleted");
                 }
 
             }else {

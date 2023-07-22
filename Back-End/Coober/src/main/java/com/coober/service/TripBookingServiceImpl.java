@@ -1,12 +1,24 @@
 package com.coober.service;
 
+import java.util.Comparator;
+import java.util.List;
+import java.util.Optional;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.coober.Exception.CooberException;
 import com.coober.Exception.cooberException;
+
 import com.coober.modal.Customer;
 import com.coober.modal.Driver;
 import com.coober.modal.TripBooking;
 import com.coober.repository.CustomerRepository;
 import com.coober.repository.DriverRepository;
 import com.coober.repository.TripBookingRepository;
+import lombok.extern.slf4j.Slf4j;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,6 +44,7 @@ public class TripBookingServiceImpl implements TripBookingService {
     private CustomerRepository customerRepository;
 
     @Override
+
     public TripBooking insertTripBooking(TripBooking tripBooking ,Integer customerId) throws cooberException {
         logger.info("Inserting trip booking: {}", tripBooking);
         try{
@@ -65,7 +78,7 @@ public class TripBookingServiceImpl implements TripBookingService {
                 }
             }
 
-            if( driver == null ) throw new cooberException("No Driver Available at the moment");
+            if( driver == null ) throw new CooberException("No Driver Available at the moment");
 
             tripB.setDriver(driver);
 
@@ -86,11 +99,13 @@ public class TripBookingServiceImpl implements TripBookingService {
         }
         catch (Exception e) {
             logger.error("Error occurred while inserting trip booking", e);
+
             throw new cooberException("Failed to insert trip booking");
         }
     }
 
     @Override
+
     public TripBooking updateTripBooking(TripBooking tripBooking) throws cooberException {
         logger.info("Updating trip booking: {}", tripBooking);
 
