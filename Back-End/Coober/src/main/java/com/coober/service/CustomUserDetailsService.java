@@ -1,4 +1,8 @@
 package com.coober.service;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -8,9 +12,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import com.coober.modal.Admin;
+import com.coober.modal.Customer;
+import com.coober.modal.Driver;
+import com.coober.repository.AdminRepository;
+import com.coober.repository.CustomerRepository;
+import com.coober.repository.DriverRepository;
 
 @Service
 public class CustomUserDetailsService  implements UserDetailsService {
