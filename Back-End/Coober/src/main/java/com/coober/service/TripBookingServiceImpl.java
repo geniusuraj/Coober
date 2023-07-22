@@ -10,14 +10,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.coober.Exception.CooberException;
+import com.coober.Exception.cooberException;
+
 import com.coober.modal.Customer;
 import com.coober.modal.Driver;
 import com.coober.modal.TripBooking;
 import com.coober.repository.CustomerRepository;
 import com.coober.repository.DriverRepository;
 import com.coober.repository.TripBookingRepository;
-
 import lombok.extern.slf4j.Slf4j;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.Comparator;
+import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -34,7 +44,8 @@ public class TripBookingServiceImpl implements TripBookingService {
     private CustomerRepository customerRepository;
 
     @Override
-    public TripBooking insertTripBooking(TripBooking tripBooking ,Integer customerId) throws CooberException {
+
+    public TripBooking insertTripBooking(TripBooking tripBooking ,Integer customerId) throws cooberException {
         logger.info("Inserting trip booking: {}", tripBooking);
         try{
             Optional<Customer> customer = customerRepository.findById(customerId);
@@ -83,17 +94,19 @@ public class TripBookingServiceImpl implements TripBookingService {
                 return tripB;
 
             } else {
-                throw new CooberException("Customer not found with id " + tripBooking.getCustomer().getCustomerId());
+                throw new cooberException("Customer not found with id " + tripBooking.getCustomer().getCustomerId());
             }
         }
         catch (Exception e) {
             logger.error("Error occurred while inserting trip booking", e);
-            throw new CooberException("Failed to insert trip booking");
+
+            throw new cooberException("Failed to insert trip booking");
         }
     }
 
     @Override
-    public TripBooking updateTripBooking(TripBooking tripBooking) throws CooberException {
+
+    public TripBooking updateTripBooking(TripBooking tripBooking) throws cooberException {
         logger.info("Updating trip booking: {}", tripBooking);
 
         try{
@@ -103,54 +116,54 @@ public class TripBookingServiceImpl implements TripBookingService {
                 TripBooking updatedTrip = tripBookingRepository.save(tripBooking);
                 return updatedTrip;
             } else {
-                throw new CooberException("User not found!");
+                throw new cooberException("User not found!");
             }
         }
         catch (Exception e) {
             logger.error("Error occurred while updating trip booking", e);
-            throw new CooberException("Failed to update trip booking");
+            throw new cooberException("Failed to update trip booking");
         }
     }
 
     @Override
-    public TripBooking deleteTripBooking(Integer tripBookingId) throws CooberException {
+    public TripBooking deleteTripBooking(Integer tripBookingId) throws cooberException {
         logger.info("Deleting trip booking with ID: {}", tripBookingId);
 
         try{
             TripBooking tripBooking = tripBookingRepository.findById(tripBookingId)
-                    .orElseThrow(() -> new CooberException("Trip booking not found with ID: " + tripBookingId));
+                    .orElseThrow(() -> new cooberException("Trip booking not found with ID: " + tripBookingId));
 
             tripBookingRepository.delete(tripBooking);
             return tripBooking;
         }
         catch (Exception e) {
             logger.error("Error occurred while deleting trip booking", e);
-            throw new CooberException("Failed to delete trip booking");
+            throw new cooberException("Failed to delete trip booking");
         }
     }
 
     @Override
-    public List<TripBooking> viewAllTripsCustomer(Integer customerId) throws CooberException {
+    public List<TripBooking> viewAllTripsCustomer(Integer customerId) throws cooberException {
         logger.info("Retrieving all trip bookings for customer with ID: {}", customerId);
         try{
             Customer customer = customerRepository.findById(customerId)
-                    .orElseThrow(() -> new CooberException("Customer not found with ID: " + customerId));
+                    .orElseThrow(() -> new cooberException("Customer not found with ID: " + customerId));
 
             return tripBookingRepository.findAllByCustomer(customer);
         }
         catch (Exception e) {
             logger.error("Error occurred while retrieving trip bookings for customer with ID: {}", customerId, e);
-            throw new CooberException("Failed to retrieve trip bookings for customer");
+            throw new cooberException("Failed to retrieve trip bookings for customer");
         }
     }
 
     @Override
-    public float calculateBill(Integer customerId) throws CooberException {
+    public float calculateBill(Integer customerId) throws cooberException {
         logger.info("Calculating bill for customer with ID: {}", customerId);
 
         try{
             Customer customer = customerRepository.findById(customerId)
-                    .orElseThrow(() -> new CooberException("Customer not found with ID: " + customerId));
+                    .orElseThrow(() -> new cooberException("Customer not found with ID: " + customerId));
 
             List<TripBooking> tripBookings = tripBookingRepository.findAllByCustomer(customer);
 
@@ -173,18 +186,18 @@ public class TripBookingServiceImpl implements TripBookingService {
         }
         catch (Exception e) {
             logger.error("Error occurred while calculating bill for customer with ID: {}", customerId, e);
-            throw new CooberException("Failed to calculate bill for customer");
+            throw new cooberException("Failed to calculate bill for customer");
         }
     }
 
 
     @Override
-    public List<TripBooking> getAllTripBooking(Integer customerid) throws CooberException {
+    public List<TripBooking> getAllTripBooking(Integer customerid) throws cooberException {
         Optional<Customer> opt = customerRepository.findById(customerid);
         if (opt.isPresent()) {
             List<TripBooking> trips = opt.get().getTripBookings();
             return trips;
         }
-        throw new CooberException("Invalid id");
+        throw new cooberException("Invalid id");
     }
 }

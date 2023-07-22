@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 
 import com.coober.Exception.CooberException;
 import com.coober.Exception.NotFoundException;
+import org.springframework.stereotype.Service;
+
+import com.coober.Exception.CooberException;
 import com.coober.modal.Driver;
 import com.coober.repository.DriverRepository;
 
@@ -76,11 +79,7 @@ public class DriverServiceImpl implements DriverService{
         return updatedDriver;
     }
 
-    /**
-     * @param driverId
-     * @return Driver
-     * Take driver id of Integer type, return deletedDriver;
-     */
+  
     @Override
     public Driver deleteDriver(Integer driverId) {
         log.info("Class: DriverServiceImpl, method: deleteDriver started ");
@@ -88,6 +87,10 @@ public class DriverServiceImpl implements DriverService{
         Optional<Driver> opt= driverRepository.findById(driverId);
         if(opt.isEmpty()) throw new NotFoundException("Driver with id: "+driverId+ "does not exist.");
             
+
+        if(opt.isEmpty())
+            throw new NotFoundException("Driver with id: "+driverId+ "does not exist.");
+
 
         driverRepository.deleteById(driverId);
         log.info("Class: DriverServiceImpl, method: deleteDriver returned deleted driver");

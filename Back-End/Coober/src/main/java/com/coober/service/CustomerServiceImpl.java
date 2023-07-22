@@ -1,5 +1,4 @@
 package com.coober.service;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -88,6 +87,7 @@ public class CustomerServiceImpl implements CustomerService{
                     log.info("Customer Validated successful : CustomerService");
                     return customer;
                 }else{
+
                     throw new CooberException("This user is Deleted");
                 }
 
