@@ -5,10 +5,10 @@ import java.util.List;
 
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 
+import com.coober.Exception.DataNotFoundException;
+import com.coober.Exception.InvalidInputException;
 import com.coober.modal.Admin;
 import com.coober.modal.TripBooking;
-import com.rideeasy.exception.DataNotFoundException;
-import com.rideeasy.exception.InvalidInputException;
 
 public interface AdminService {
 	

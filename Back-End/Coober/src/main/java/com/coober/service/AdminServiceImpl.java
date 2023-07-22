@@ -1,6 +1,4 @@
 package com.coober.service;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.coober.Exception.DataNotFoundException;
+import com.coober.Exception.InvalidInputException;
 import com.coober.modal.Admin;
 import com.coober.modal.Customer;
 import com.coober.modal.TripBooking;

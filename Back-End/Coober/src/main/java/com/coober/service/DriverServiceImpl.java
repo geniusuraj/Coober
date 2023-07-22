@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.coober.Exception.cooberException;
+import com.coober.Exception.CooberException;
 import com.coober.modal.Driver;
 import com.coober.repository.DriverRepository;
 
@@ -31,22 +31,22 @@ public class DriverServiceImpl implements DriverService{
         log.info("Class: DriverServiceImpl, method: insertDriver started ");
 
         // checking for null;
-        if (driver==null) throw new cooberException("null value");
+        if (driver==null) throw new CooberException("null value");
 
         // checking for already existing username;
          Optional<Driver> opt= driverRepository.findByUserName(driver.getUserName());
          if(opt.isPresent())
-             throw new cooberException("This username already exists, please provide another username");
+             throw new CooberException("This username already exists, please provide another username");
 
          // checking for already existing mobile number;
         Optional<Driver> opt1= driverRepository.findByMobileNumber(driver.getMobileNumber());
         if(opt1.isPresent())
-            throw new cooberException("This mobile number already exists, please provide another mobile number");
+            throw new CooberException("This mobile number already exists, please provide another mobile number");
 
         // checking for already existing email;
         Optional<Driver> opt2= driverRepository.findByEmail(driver.getEmail());
         if(opt2.isPresent())
-            throw new cooberException("This email already exists, please provide another email");
+            throw new CooberException("This email already exists, please provide another email");
 
         //persisting the driver object;
         Driver persistedDriver= driverRepository.save(driver);
@@ -64,11 +64,11 @@ public class DriverServiceImpl implements DriverService{
         log.info("Class: DriverServiceImpl, method: updateDriver started ");
 
         // checking for null;
-        if (driver==null) throw new cooberException("null value");
+        if (driver==null) throw new CooberException("null value");
 
         Optional<Driver> opt= driverRepository.findByUserName(driver.getUserName());
         if(opt.isEmpty())
-            throw new cooberException("This username does not exists");
+            throw new CooberException("This username does not exists");
 
         //updating the driver object;
         Driver updatedDriver= driverRepository.save(driver);
