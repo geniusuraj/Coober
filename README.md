@@ -10,7 +10,7 @@ This project is an online cab booking application built with Spring Boot. It pro
 - Member 2: [Suraj Kumar Sharma](https://github.com/geniusuraj)
 - Member 3: [Sudhist Kumar](https://github.com/ersudhist)
 - Member 4: [Harsh Rai](https://github.com/RHarsh0)
-- Member 4: [Akhil Suryan](https://github.com/akhil368)
+- Member 5: [Akhil Suryan](https://github.com/akhil368)
 
 ## Tech Stack
 
