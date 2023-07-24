@@ -80,4 +80,8 @@ Request body:
 }
 
 # Replace {id} with the ID of the cab booking you want to update
+```
+## Entity-Relationship Diagram
+### Here is the ER Diagram for our database:
+![Entity-Relationship Diagram](https://github.com/sarthakdevhub/vestal-trouble-683/blob/main/Back-End/E-R.png)
 
