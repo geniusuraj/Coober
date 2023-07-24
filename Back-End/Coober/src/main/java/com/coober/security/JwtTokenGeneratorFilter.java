@@ -44,7 +44,7 @@ public class JwtTokenGeneratorFilter extends OncePerRequestFilter {
             SecretKey key = Keys.hmacShaKeyFor(SecurityConstants.JWT_KEY.getBytes());
 
             String jwt = Jwts.builder()
-                    .setIssuer("Ram")
+                    .setIssuer("Suraj")
                     .setSubject("JWT Token")
                     .claim("username", authentication.getName())
                     .claim("authorities", populateAuthorities(authentication.getAuthorities()))

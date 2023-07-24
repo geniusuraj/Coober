@@ -1,6 +1,5 @@
 package com.coober.modal;
 
-import java.sql.Driver;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
