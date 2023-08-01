@@ -1,4 +1,4 @@
-![My Image](images/cab.png)
+![My Image](images/cab.jpg)
 # Coober - Online Cab Booking Application
 
 ## Description
