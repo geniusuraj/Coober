@@ -1,4 +1,4 @@
-# Online Cab Booking Application
+# Coober - Online Cab Booking Application
 
 ## Description
 
